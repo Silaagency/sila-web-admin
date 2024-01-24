@@ -1,0 +1,41 @@
+.bm-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border-radius: 30px;
+    overflow: auto;
+    background-color: #000;
+    color: #fff;
+}
+
+.bm-grid div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    padding: 10px;
+    border-left: 2px solid #fff;
+}
+
+.ad-id, .ad-name, .bm-id {
+    border-bottom: 2px solid #fff;
+}
+
+.decision-container {
+    display: flex;
+    gap: 20px;
+}
+
+.decision-container button {
+    padding: 5px;
+    padding-inline: 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.decision-container button:nth-of-type(2) {
+    background-color: transparent;
+    border: 3px solid #fff;
+    color: #fff;
+}

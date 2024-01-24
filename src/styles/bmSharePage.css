@@ -1,0 +1,14 @@
+.bm-share-page {
+    padding: 50px;
+}
+
+.bmbar {
+    height: 70px;
+    background-color: #000;
+    border-radius: 50px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}

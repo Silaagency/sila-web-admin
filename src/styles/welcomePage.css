@@ -1,0 +1,23 @@
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.dashboard-image {
+    height: 50%;
+    opacity: 0;
+    animation: fade-in 3s forwards;
+}
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+    }
+}
+
+.welcome-loading {
+    height: 50%;
+}

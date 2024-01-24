@@ -1,0 +1,49 @@
+.meta-page {
+    padding: 50px;
+}
+
+.metabar {
+    height: 70px;
+    background-color: #000;
+    border-radius: 50px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.cards-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    transform: translateY(-200%);
+    animation: slide-up 1s forwards;
+}
+
+@keyframes slide-up {
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.cards-container div {
+    height: 200px;
+    width: 300px;
+    background-color: #000;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .3s ease;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.cards-container div:hover {
+    box-shadow: 0px 0px 80px rgba(0, 0, 0, .5);
+    transform: scale(1.1);
+}

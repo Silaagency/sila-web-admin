@@ -1,0 +1,12 @@
+.dashboard-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 30px;
+    object-fit: cover;
+}
