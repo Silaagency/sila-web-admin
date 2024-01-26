@@ -1,7 +1,156 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/walletGrid.css';
+import { css } from '@emotion/react';
+import { RingLoader } from 'react-spinners';
 
 function WalletGrid() {
+
+  const [apiData, setApiData] = useState([]);
+  const [acceptLoading, setAcceptLoading] = useState(false);
+  const [rejectedLoading, setRejectedLoading] = useState(false);
+
+  const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
+
+  useEffect(() => {
+    const walletApi = async () => {
+      try {
+        const response = await fetch('http://192.168.1.3:4000/transaction');
+        const data = await response.json();
+        setApiData(data.transactions);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    walletApi();
+  }, []);
+
+  const acceptTransaction = (_id) => {
+    setAcceptLoading(true);
+
+    const target = apiData.find((x) => x._id === _id);
+
+    const usersApi = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.3:4000/users/${target.userID}`);
+        const data = await response.json();
+
+        const currentWallet = data.user.wallet;
+
+        //Patching the user's wallet
+        const userWalletApi = async () => {
+          try {
+            const response = await fetch(`http://192.168.1.3:4000/users/wallet/${target.userID}`, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                wallet: currentWallet + target.chargeAmount
+              })
+            });
+    
+            const data = await response.json();
+          } catch (err) {
+            console.error(err);
+          }
+        };
+
+        userWalletApi();
+        /////////////////////
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    usersApi();
+
+    //Patching the status of the transaction to 'Accepted'
+    const transactionApi = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.3:4000/transaction/${target._id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            status: 'Accepted'
+          })
+        });
+
+        const data = await response.json();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    transactionApi();
+    ////////////////////////
+
+
+    //Posting the amount to payment history
+    const paymentHistoryApi = async () => {
+      try {
+        const response = await fetch('http://192.168.1.3:4000/paymentHistory', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userID: target.userID,
+            type: 'Wallet re-charge',
+            amount: `+${target.chargeAmount}`
+          })
+        });
+
+        const data = await response.json();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    paymentHistoryApi();
+    /////////////////////
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000);
+  };
+
+  const rejectTransaction = (_id) => {
+    setRejectedLoading(true);
+
+    const target = apiData.find((x) => x._id === _id);
+
+    const transactionApi = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.3:4000/transaction/${target._id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            status: 'Rejected'
+          })
+        });
+
+        const data = await response.json();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    transactionApi();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000);
+  };
+
   return (
     <div className='wallet-grid'>
       <div className="id">Application ID</div>
@@ -15,53 +164,61 @@ function WalletGrid() {
       <div className="date">Date</div>
       <div className="decision">Decision</div>
 
-      <div>5483539578497359</div>
-      <div>Fake user</div>
-      <div>test@gmail.com</div>
-      <div>0556753663</div>
-      <div>1000</div>
-      <div>57837534754337</div>
-      <div>
-        <img className='transaction-proof' src="https://storage.googleapis.com/support-forums-api/attachment/thread-191661601-15203805108075818741.JPG" alt="" />
-      </div>
-      <div>USDT</div>
-      <div>20.05.2023</div>
-      <div className='decision-btn-container'>
-        <button className="accept-btn">Accept</button>
-        <button className="reject-btn">Reject</button>
-      </div>
+      {
+        apiData.map((x) => (
+          <>
+            <div>{x._id}</div>
+            <div>{x.userName}</div>
+            <div>{x.email}</div>
+            <div>{x.phoneNumber}</div>
+            <div>{x.chargeAmount}</div>
+            <div>{x.transactionID}</div>
+            <div>
+              <img className='transaction-proof' src={x.photoProof} alt="" />
+            </div>
+            <div>{x.paymentMethod}</div>
+            <div>{x.date}</div>
+            <div className='decision-btn-container'>
+              {
+                x.status === 'Pending' && (
+                  <>
+                    <button onClick={() => acceptTransaction(x._id)} className="accept-btn">
+                      {
+                        acceptLoading ? (
+                          <RingLoader color={'#123abc'} loading={true} css={override} size={20} />
+                        ) : (
+                          <p>Accept</p>
+                        )
+                      }
+                    </button>
+                    <button onClick={() => rejectTransaction(x._id)} className="reject-btn">
+                      {
+                        rejectedLoading ? (
+                          <RingLoader color={'#123abc'} loading={true} css={override} size={20} />
+                        ) : (
+                          <p>Reject</p>
+                        )
+                      }
+                    </button>
+                  </>
+                )
+              }
 
-      <div>5483539578497359</div>
-      <div>Fake user</div>
-      <div>test@gmail.com</div>
-      <div>0556753663</div>
-      <div>1000</div>
-      <div>57837534754337</div>
-      <div>
-        <img className='transaction-proof' src="https://storage.googleapis.com/support-forums-api/attachment/thread-191661601-15203805108075818741.JPG" alt="" />
-      </div>
-      <div>USDT</div>
-      <div>20.05.2023</div>
-      <div className='decision-btn-container'>
-        <button className="accept-btn">Accept</button>
-        <button className="reject-btn">Reject</button>
-      </div>
+              {
+                x.status === 'Accepted' && (
+                  <p>Accepted</p>
+                )
+              }
 
-      <div>5483539578497359</div>
-      <div>Fake user</div>
-      <div>test@gmail.com</div>
-      <div>0556753663</div>
-      <div>1000</div>
-      <div>57837534754337</div>
-      <div>
-        <img className='transaction-proof' src="https://storage.googleapis.com/support-forums-api/attachment/thread-191661601-15203805108075818741.JPG" alt="" />
-      </div>
-      <div>USDT</div>
-      <div>20.05.2023</div>
-      <div className='decision-btn-container'>
-        <button className="accept-btn">Accept</button>
-        <button className="reject-btn">Reject</button>
-      </div>
+              {
+                x.status === 'Rejected' && (
+                  <p>Rejected</p>
+                )
+              }
+            </div>
+          </>
+        ))
+      }
     </div>
   )
 };
