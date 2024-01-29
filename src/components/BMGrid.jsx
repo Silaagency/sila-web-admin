@@ -1,7 +1,91 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/bmGrid.css';
+import { css } from '@emotion/react';
+import { RingLoader } from 'react-spinners';
 
 function BMGrid() {
+
+    const [apiData, setApiData] = useState([]);
+
+    const [acceptLoading, setAcceptLoading] = useState(false);
+    const [rejectedLoading, setRejectedLoading] = useState(false);
+
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
+
+    useEffect(() => {
+        const bmShareApi = async () => {
+            try {
+                const response = await fetch('http://192.168.1.3:4000/bmShare');
+                const data = await response.json();
+                setApiData(data.bmShares);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        bmShareApi();
+    }, []);
+
+    const accept = (_id) => {
+        setAcceptLoading(true);
+
+        const target = apiData.find((x) => x._id === _id);
+
+        const bmStatusPatchApi = async () => {
+            try {
+                const response = await fetch(`http://192.168.1.3:4000/bmShare/${target._id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'Accepted'
+                    })
+                });
+
+                const data = await response.json();
+                setAcceptLoading(false);
+                window.location.reload();
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        bmStatusPatchApi();
+    };
+
+    const reject = (_id) => {
+        setRejectedLoading(true);
+
+        const target = apiData.find((x) => x._id === _id);
+
+        const bmStatusPatchApi = async () => {
+            try {
+                const response = await fetch(`http://192.168.1.3:4000/bmShare/${target._id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        status: 'Rejected'
+                    })
+                });
+
+                const data = await response.json();
+                setRejectedLoading(false);
+                window.location.reload();
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        bmStatusPatchApi();
+    };
+
   return (
     <div className='bm-grid'>
         <div className="id">Application ID</div>
@@ -11,45 +95,53 @@ function BMGrid() {
         <div className="date">Date</div>
         <div className="decision">Decision</div>
 
-        <div>3543587834975483</div>
-        <div>45309853085</div>
-        <div>ejigorjdg</div>
-        <div>5834534853957</div>
-        <div>20.03.2020</div>
-        <div className='decision-container'>
-            <button>Accept</button>
-            <button>Reject</button>
-        </div>
+        {
+            apiData.map((x) => (
+                <>
+                    <div>{x._id}</div>
+                    <div>{x.adID}</div>
+                    <div>{x.adName}</div>
+                    <div>{x.bmID}</div>
+                    <div>{x.date}</div>
+                    {
+                        x.status === 'Pending' && (
+                            <div className='decision-container'>
+                                <button onClick={() => accept(x._id)}>
+                                    {
+                                        acceptLoading ? (
+                                            <RingLoader color={'#123abc'} loading={true} css={override} size={20} />
+                                        ) : (
+                                            <p>Accept</p>
+                                        )
+                                    }
+                                </button>
+                                <button onClick={() => reject(x._id)}>
+                                    {
+                                        rejectedLoading ? (
+                                            <RingLoader color={'#123abc'} loading={true} css={override} size={20} />
+                                        ) : (
+                                            <p>Reject</p>
+                                        )
+                                    }
+                                </button>
+                            </div>
+                        )
+                    }
 
-        <div>3543587834975483</div>
-        <div>45309853085</div>
-        <div>ejigorjdg</div>
-        <div>5834534853957</div>
-        <div>20.03.2020</div>
-        <div className='decision-container'>
-            <button>Accept</button>
-            <button>Reject</button>
-        </div>
+                    {
+                        x.status === 'Accepted' && (
+                            <div>Accepted</div>
+                        )
+                    }
 
-        <div>3543587834975483</div>
-        <div>45309853085</div>
-        <div>ejigorjdg</div>
-        <div>5834534853957</div>
-        <div>20.03.2020</div>
-        <div className='decision-container'>
-            <button>Accept</button>
-            <button>Reject</button>
-        </div>
-
-        <div>3543587834975483</div>
-        <div>45309853085</div>
-        <div>ejigorjdg</div>
-        <div>5834534853957</div>
-        <div>20.03.2020</div>
-        <div className='decision-container'>
-            <button>Accept</button>
-            <button>Reject</button>
-        </div>
+                    {
+                        x.status === 'Rejected' && (
+                            <div>Rejected</div>
+                        )
+                    }
+                </>
+            ))
+        }
     </div>
   )
 };

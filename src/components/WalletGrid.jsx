@@ -9,6 +9,10 @@ function WalletGrid() {
   const [acceptLoading, setAcceptLoading] = useState(false);
   const [rejectedLoading, setRejectedLoading] = useState(false);
 
+  const [firstApiDone, setFirstApiDone] = useState(false);
+  const [secondApiDone, setSecondApiDone] = useState(false);
+  const [thirdApiDone, setThirdApiDone] = useState(false);
+
   const override = css`
     display: block;
     margin: 0 auto;
@@ -55,6 +59,7 @@ function WalletGrid() {
             });
     
             const data = await response.json();
+            setFirstApiDone(true);
           } catch (err) {
             console.error(err);
           }
@@ -83,6 +88,7 @@ function WalletGrid() {
         });
 
         const data = await response.json();
+        setSecondApiDone(true);
       } catch (err) {
         console.error(err);
       }
@@ -108,6 +114,7 @@ function WalletGrid() {
         });
 
         const data = await response.json();
+        setThirdApiDone(true);
       } catch (err) {
         console.error(err);
       }
@@ -115,11 +122,16 @@ function WalletGrid() {
 
     paymentHistoryApi();
     /////////////////////
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 5000);
   };
+
+
+  useEffect(() => {
+    if (firstApiDone && secondApiDone && thirdApiDone) {
+      window.location.reload();
+    }
+  }, [firstApiDone, secondApiDone, thirdApiDone]);
+
+
 
   const rejectTransaction = (_id) => {
     setRejectedLoading(true);
@@ -139,16 +151,13 @@ function WalletGrid() {
         });
 
         const data = await response.json();
+        window.location.reload();
       } catch (err) {
         console.error(err);
       }
     };
 
     transactionApi();
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 5000);
   };
 
   return (

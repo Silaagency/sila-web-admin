@@ -4,7 +4,7 @@
     height: 100%;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    background-color: #000;
+    background-color: purple;
     padding: 30px;
     transform: translateX(-100%);
     animation: slide-in 1s forwards 1s;
