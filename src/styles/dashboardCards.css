@@ -1,5 +1,12 @@
 .dashboard-cards {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-container {
+    width: 100%;
+    max-width: 1300px;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -9,7 +16,10 @@
 
 .card {
     height: 30%;
+    max-height: 200px;
     width: 40%;
+    max-width: 430px;
+    min-width: 300px;
     border-radius: 40px;
     padding: 20px;
     display: flex;
@@ -19,13 +29,13 @@
     border: 5px solid purple;
 }
 
-.users-text {
+.text-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.users-text div {
+.text-container div {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -43,30 +53,19 @@
     justify-content: center;
 }
 
-.available-users {
+.available-users, .completed-payments {
     display: flex;
     gap: 10px;
 }
 
-.users-list {
+.users-list, .payments-list {
     overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* .users-list::-webkit-scrollbar {
-    background-color: transparent;
-    width: 5px;
-}
-
-.users-list::-webkit-scrollbar-thumb {
-    width: 100%;
-    background-color: purple;
-    border-radius: 40px;
-} */
-
-.user {
+.user, .payment {
     display: flex;
     width: 100%;
     gap: 10px;

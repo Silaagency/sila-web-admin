@@ -16,47 +16,116 @@
 .ad-account {
     margin-top: 30px;
     padding: 20px;
-    border-radius: 30px;
-    background-color: #000;
-    color: #fff;
     display: flex;
     flex-direction: column;
     gap: 30px;
     overflow: auto;
+    border-bottom: 4px solid purple;
 }
 
-.ad-account div {
+.license-id, .license-name, .user-email, .user-phone, 
+.page-number, .domain-number, .is-app, .ads-number, 
+.shopify-shop, .remark, .total-cost {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 20px;
-    font-size: 1.5rem;
+    gap: 10px;
 }
 
-.shopify-shop {
+.top-section {
     display: flex;
-    align-items: center;
+    gap: 30px;
+}
+
+.left-section, .right-section {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+}
+
+.page-urls, .domains, .app-ids, .ad-accounts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.page-url-card, .domain-card, .app-id-card, 
+.ad-account-card {
+    background-color: purple;
+    color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-url-card svg {
+    transform: scale(1.2);
 }
 
 .shopify-shop img {
     height: 70px;
+    border: 1px solid purple;
     border-radius: 20px;
 }
 
+.decision {
+    display: flex;
+    gap: 20px;
+}
+
 .accept {
-    background-color: #fff;
-    border: none;
-    border-radius: 50px;
-    padding: 20px 150px;
+    background-color: purple;
+    color: #fff;
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    transition: all .3s ease;
+}
+
+.accept:hover {
+    background-color: rgb(144, 94, 144);
 }
 
 .reject {
-    border-radius: 50px;
-    padding: 20px 150px;
-    border: 3px solid #fff;
-    background-color: transparent;
-    color: #fff;
+    border: 3px solid purple;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease;
     cursor: pointer;
+}
+
+.reject:hover {
+    background-color: red;
+    color: #fff;
+}
+
+.accepted, .rejected {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.accepted div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: green;
+}
+
+.rejected div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: red;
+}
+
+.accepted div svg, .rejected div svg {
+    transform: scale(1.4);
 }

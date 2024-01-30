@@ -1,6 +1,20 @@
 .dashboard-page {
     height: 100vh;
     display: flex;
+    margin-left: 0;
+    animation: slide 1s forwards 1s;
+}
+
+@keyframes slide {
+    100% {
+        margin-left: 200px;
+    }
+}
+
+@keyframes slide-out {
+    100% {
+        margin-left: 0;
+    }
 }
 
 .dashboard-img {
@@ -8,4 +22,15 @@
     height: 100%;
     border-radius: 30px;
     object-fit: cover;
+}
+
+
+
+
+
+@media (max-width: 936px) {
+    .dashboard-page {
+        animation: slide-out 1s forwards 1s;
+        flex-direction: column;
+    }
 }

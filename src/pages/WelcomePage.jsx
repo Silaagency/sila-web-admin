@@ -9,7 +9,7 @@ function WelcomePage() {
 
   useEffect(() => {
     setTimeout(() => {
-      navigate('/dashboard');
+      navigate('/pass');
     }, 5000);
   }, []);
 

@@ -1,0 +1,67 @@
+.pass-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-window {
+    height: 60%;
+    max-height: 400px;
+    width: 50%;
+    max-width: 700px;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, .7);
+}
+
+.login-window img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-window div {
+    width: 50%;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.login-window div input {
+    height: 50px;
+    border: none;
+    border-bottom: 3px solid purple;
+}
+
+.login-window div input:focus {
+    outline: none;
+}
+
+.login-window div button {
+    font-size: 1rem;
+    padding: 16px;
+    border-radius: 40px;
+    border: none;
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+
+
+@media (max-width: 930px) {
+    .login-window img {
+        display: none;
+    }
+
+    .login-window div {
+        width: 100%;
+    }
+}

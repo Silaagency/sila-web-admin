@@ -1,6 +1,7 @@
 .sidebar {
     width: 20%;
-    min-width: 20%;
+    max-width: 400px;
+    min-width: 250px;
     height: 100%;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -11,6 +12,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
 }
 
 @keyframes slide-in {
@@ -39,7 +44,6 @@
 }
 
 .platforms-list {
-    border-radius: 30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -62,4 +66,20 @@
 .list-btn:hover {
     background-color: transparent;
     color: #fff;
+}
+
+
+
+
+
+@media (max-width: 936px) {
+    .sidebar {
+        width: 100%;
+        position: initial;
+        width: 100%;
+        max-width: 100%;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-radius: 30px;
+    }
 }
