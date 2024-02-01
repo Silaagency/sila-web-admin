@@ -173,7 +173,7 @@ function RefundGrid() {
                     <div>{x.adAccountName}</div>
                     <div>{x.refundReason}</div>
                     <div>{x.amount}</div>
-                    <div>{x.date}</div>
+                    <div>{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
                     {
                         x.status === 'Pending' && (
                             <div className='decision-container'>

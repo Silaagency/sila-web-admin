@@ -186,7 +186,7 @@ function WalletGrid() {
               <img className='transaction-proof' src={x.photoProof} alt="" />
             </div>
             <div>{x.paymentMethod}</div>
-            <div>{x.date}</div>
+            <div>{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
             <div className='decision-btn-container'>
               {
                 x.status === 'Pending' && (
