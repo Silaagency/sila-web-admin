@@ -17,7 +17,7 @@ function DashboardCards() {
     useEffect(() => {
         const usersApi = async () => {
             try {
-                const response = await fetch('http://192.168.1.3:4000/users');
+                const response = await fetch('https://sila-4io5.onrender.com/users');
                 const data = await response.json();
                 setUsersCount(data.count);
                 setUsersData(data.users);
@@ -32,7 +32,7 @@ function DashboardCards() {
     useEffect(() => {
         const licenseApi = async () => {
             try {
-                const response = await fetch('http://192.168.1.3:4000/ad');
+                const response = await fetch('https://sila-4io5.onrender.com/ad');
                 const data = await response.json();
                 setLicenseCount(data.count);
             } catch (err) {
@@ -46,7 +46,7 @@ function DashboardCards() {
     useEffect(() => {
         const paymentHistoryApi = async () => {
             try {
-                const response = await fetch('http://192.168.1.3:4000/paymentHistory');
+                const response = await fetch('https://sila-4io5.onrender.com/paymentHistory');
                 const data = await response.json();
                 setPaymentsData(data.history);
             } catch (err) {
@@ -60,7 +60,7 @@ function DashboardCards() {
     useEffect(() => {
         const bmSharesApi = async () => {
             try {
-                const response = await fetch('http://192.168.1.3:4000/bmShare');
+                const response = await fetch('https://sila-4io5.onrender.com/bmShare');
                 const data = await response.json();
                 setBmShareCount(data.count);
             } catch (err) {

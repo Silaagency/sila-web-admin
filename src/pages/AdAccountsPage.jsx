@@ -19,7 +19,7 @@ function AdAccountsPage() {
   useEffect(() => {
     const licenseApi = async () => {
       try {
-        const response = await fetch('http://192.168.1.3:4000/ad');
+        const response = await fetch('https://sila-4io5.onrender.com/ad');
         const data = await response.json();
         setApiData(data.ADs);
       } catch (err) {
@@ -37,7 +37,7 @@ function AdAccountsPage() {
 
     const patchLicenseStatusApi = async () => {
       try {
-        const response = await fetch(`http://192.168.1.3:4000/ad/${target._id}`, {
+        const response = await fetch(`https://sila-4io5.onrender.com/ad/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ function AdAccountsPage() {
 
     const patchLicenseStatusApi = async () => {
       try {
-        const response = await fetch(`http://192.168.1.3:4000/ad/${target._id}`, {
+        const response = await fetch(`https://sila-4io5.onrender.com/ad/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
