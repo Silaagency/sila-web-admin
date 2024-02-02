@@ -19,7 +19,7 @@ function BMGrid() {
     useEffect(() => {
         const bmShareApi = async () => {
             try {
-                const response = await fetch('https://sila-4io5.onrender.com/bmShare');
+                const response = await fetch('https://sila-vbyf.onrender.com/bmShare');
                 const data = await response.json();
                 setApiData(data.bmShares);
             } catch (err) {
@@ -37,7 +37,7 @@ function BMGrid() {
 
         const bmStatusPatchApi = async () => {
             try {
-                const response = await fetch(`https://sila-4io5.onrender.com/bmShare/${target._id}`, {
+                const response = await fetch(`https://sila-vbyf.onrender.com/bmShare/${target._id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ function BMGrid() {
 
         const bmStatusPatchApi = async () => {
             try {
-                const response = await fetch(`https://sila-4io5.onrender.com/bmShare/${target._id}`, {
+                const response = await fetch(`https://sila-vbyf.onrender.com/bmShare/${target._id}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json'

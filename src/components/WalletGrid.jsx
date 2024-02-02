@@ -22,7 +22,7 @@ function WalletGrid() {
   useEffect(() => {
     const walletApi = async () => {
       try {
-        const response = await fetch('https://sila-4io5.onrender.com/transaction');
+        const response = await fetch('https://sila-vbyf.onrender.com/transaction');
         const data = await response.json();
         setApiData(data.transactions);
       } catch (err) {
@@ -40,7 +40,7 @@ function WalletGrid() {
 
     const usersApi = async () => {
       try {
-        const response = await fetch(`https://sila-4io5.onrender.com/users/${target.userID}`);
+        const response = await fetch(`https://sila-vbyf.onrender.com/users/${target.userID}`);
         const data = await response.json();
 
         const currentWallet = data.user.wallet;
@@ -48,7 +48,7 @@ function WalletGrid() {
         //Patching the user's wallet
         const userWalletApi = async () => {
           try {
-            const response = await fetch(`https://sila-4io5.onrender.com/users/wallet/${target.userID}`, {
+            const response = await fetch(`https://sila-vbyf.onrender.com/users/wallet/${target.userID}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json'
@@ -77,7 +77,7 @@ function WalletGrid() {
     //Patching the status of the transaction to 'Accepted'
     const transactionApi = async () => {
       try {
-        const response = await fetch(`https://sila-4io5.onrender.com/transaction/${target._id}`, {
+        const response = await fetch(`https://sila-vbyf.onrender.com/transaction/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -101,7 +101,7 @@ function WalletGrid() {
     //Posting the amount to payment history
     const paymentHistoryApi = async () => {
       try {
-        const response = await fetch('https://sila-4io5.onrender.com/paymentHistory', {
+        const response = await fetch('https://sila-vbyf.onrender.com/paymentHistory', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -140,7 +140,7 @@ function WalletGrid() {
 
     const transactionApi = async () => {
       try {
-        const response = await fetch(`https://sila-4io5.onrender.com/transaction/${target._id}`, {
+        const response = await fetch(`https://sila-vbyf.onrender.com/transaction/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
