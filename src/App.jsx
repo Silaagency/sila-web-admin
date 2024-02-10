@@ -8,6 +8,7 @@ import AdAccountsPage from './pages/AdAccountsPage';
 import BMSharePage from './pages/BMSharePage';
 import RefundPage from './pages/RefundPage';
 import PassPage from './pages/PassPage';
+import MediaBuyingPage from './pages/MediaBuyingPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/bm' element={<BMSharePage />} />
           <Route path='/refund' element={<RefundPage />} />
           <Route path='/pass' element={<PassPage />} />
+          <Route path='/media' element={<MediaBuyingPage />} />
         </Routes>
       </Router>
     </div>
