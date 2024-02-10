@@ -11,7 +11,7 @@ function MediaBuyingPage() {
     useEffect(() => {
         const mediaApi = async () => {
             try {
-                const response = await fetch('http://192.168.1.5:4000/media');
+                const response = await fetch('https://sila-b.onrender.com/media');
                 const data = await response.json();
                 setApiData(data.media)
             } catch (err) {
@@ -25,13 +25,13 @@ function MediaBuyingPage() {
     const takeCommision = (userID) => {
         const usersApi = async () => {
             try {
-                const response = await fetch(`http://192.168.1.5:4000/users/${userID}`);
+                const response = await fetch(`https://sila-b.onrender.com/users/${userID}`);
                 const data = await response.json();
                 const currentWallet = data.user.wallet;
 
                 const patchWalletApi = async () => {
                     try {
-                        const response = await fetch(`http://192.168.1.5:4000/users/wallet/${userID}`, {
+                        const response = await fetch(`https://sila-b.onrender.com/users/wallet/${userID}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json'
