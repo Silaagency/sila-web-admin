@@ -25,19 +25,19 @@ function MediaBuyingPage() {
     const takeCommision = (userID) => {
         const usersApi = async () => {
             try {
-                const response = await fetch(`https://sila-b.onrender.com/users/${userID}`);
+                const response = await fetch(`http://192.168.1.5:4000/users/${userID}`);
                 const data = await response.json();
-                const currentWallet = data.user.wallet;
+                const currentEurWallet = data.user.eurWallet;
 
                 const patchWalletApi = async () => {
                     try {
-                        const response = await fetch(`https://sila-b.onrender.com/users/wallet/${userID}`, {
+                        const response = await fetch(`http://192.168.1.5:4000/users/eurWallet/${userID}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                wallet: currentWallet - 0.65
+                                eurWallet: currentEurWallet - 0.65
                             })
                         });
 

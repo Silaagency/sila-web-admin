@@ -22,7 +22,7 @@ function WalletGrid() {
   useEffect(() => {
     const walletApi = async () => {
       try {
-        const response = await fetch('https://sila-b.onrender.com/transaction');
+        const response = await fetch('http://192.168.1.5:4000/transaction');
         const data = await response.json();
         setApiData(data.transactions);
       } catch (err) {
@@ -40,33 +40,58 @@ function WalletGrid() {
 
     const usersApi = async () => {
       try {
-        const response = await fetch(`https://sila-b.onrender.com/users/${target.userID}`);
+        const response = await fetch(`http://192.168.1.5:4000/users/${target.userID}`);
         const data = await response.json();
 
         const currentWallet = data.user.wallet;
+        const currentEurWallet = data.user.eurWallet;
 
-        //Patching the user's wallet
-        const userWalletApi = async () => {
-          try {
-            const response = await fetch(`https://sila-b.onrender.com/users/wallet/${target.userID}`, {
-              method: 'PATCH',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                wallet: currentWallet + target.chargeAmount
-              })
-            });
-    
-            const data = await response.json();
-            setFirstApiDone(true);
-          } catch (err) {
-            console.error(err);
-          }
-        };
-
-        userWalletApi();
-        /////////////////////
+        //Checking the currency then patching each wallet depending on currency
+        if (target.currency === 'USD') {
+          const userWalletApi = async () => {
+            try {
+              const response = await fetch(`http://192.168.1.5:4000/users/wallet/${target.userID}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  wallet: currentWallet + target.chargeAmount
+                })
+              });
+      
+              const data = await response.json();
+              setFirstApiDone(true);
+            } catch (err) {
+              console.error(err);
+            }
+          };
+  
+          userWalletApi();
+        } else {
+          ////////////
+          const userEurWalletApi = async () => {
+            try {
+              const response = await fetch(`http://192.168.1.5:4000/users/eurWallet/${target.userID}`, {
+                method: 'PATCH',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  eurWallet: currentEurWallet + target.chargeAmount
+                })
+              });
+      
+              const data = await response.json();
+              setFirstApiDone(true);
+            } catch (err) {
+              console.error(err);
+            }
+          };
+  
+          userEurWalletApi();
+        }
+        ///////////////////////////
       } catch (err) {
         console.error(err);
       }
@@ -169,6 +194,7 @@ function WalletGrid() {
       <div className="charge-amount">Charge Amount</div>
       <div className="transaction-id">Transaction ID</div>
       <div className="transaction-photo">Transaction Photo</div>
+      <div className="currency">Currency</div>
       <div className="payment-method">Payment Method</div>
       <div className="date">Date</div>
       <div className="decision">Decision</div>
@@ -185,6 +211,7 @@ function WalletGrid() {
             <div>
               <img className='transaction-proof' src={x.photoProof} alt="" />
             </div>
+            <div>{x.currency}</div>
             <div>{x.paymentMethod}</div>
             <div>{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
             <div className='decision-btn-container'>
