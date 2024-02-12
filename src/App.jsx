@@ -9,6 +9,7 @@ import BMSharePage from './pages/BMSharePage';
 import RefundPage from './pages/RefundPage';
 import PassPage from './pages/PassPage';
 import MediaBuyingPage from './pages/MediaBuyingPage';
+import HomeNewsPage from './pages/HomeNewsPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/refund' element={<RefundPage />} />
           <Route path='/pass' element={<PassPage />} />
           <Route path='/media' element={<MediaBuyingPage />} />
+          <Route path='/homeNews' element={<HomeNewsPage />} />
         </Routes>
       </Router>
     </div>

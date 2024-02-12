@@ -1,0 +1,66 @@
+.home-news-page {
+    padding-inline: 50px;
+}
+
+.file-input {
+    display: none;
+}
+
+.upload-btn {
+    cursor: pointer;
+}
+
+.upload-btn svg {
+    transform: scale(3);
+}
+
+.upload-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 20px;
+}
+
+.upload-section button {
+    padding: 20px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.content {
+    border: 2px solid;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.content img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.content video {
+    width: 100%;
+    object-fit: cover;
+}
+
+.image-container, .video-container {
+    position: relative;
+    width: 50%;
+}
+
+.content button {
+    padding: 30px;
+    background-color: red;
+    border-radius: 10px;
+    color: #fff;
+    border: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}

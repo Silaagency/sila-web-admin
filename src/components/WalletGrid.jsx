@@ -22,7 +22,7 @@ function WalletGrid() {
   useEffect(() => {
     const walletApi = async () => {
       try {
-        const response = await fetch('http://192.168.1.5:4000/transaction');
+        const response = await fetch('https://sila-b.onrender.com/transaction');
         const data = await response.json();
         setApiData(data.transactions);
       } catch (err) {
@@ -40,7 +40,7 @@ function WalletGrid() {
 
     const usersApi = async () => {
       try {
-        const response = await fetch(`http://192.168.1.5:4000/users/${target.userID}`);
+        const response = await fetch(`https://sila-b.onrender.com/users/${target.userID}`);
         const data = await response.json();
 
         const currentWallet = data.user.wallet;
@@ -50,7 +50,7 @@ function WalletGrid() {
         if (target.currency === 'USD') {
           const userWalletApi = async () => {
             try {
-              const response = await fetch(`http://192.168.1.5:4000/users/wallet/${target.userID}`, {
+              const response = await fetch(`https://sila-b.onrender.com/users/wallet/${target.userID}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ function WalletGrid() {
           ////////////
           const userEurWalletApi = async () => {
             try {
-              const response = await fetch(`http://192.168.1.5:4000/users/eurWallet/${target.userID}`, {
+              const response = await fetch(`https://sila-b.onrender.com/users/eurWallet/${target.userID}`, {
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json'

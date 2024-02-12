@@ -25,13 +25,13 @@ function MediaBuyingPage() {
     const takeCommision = (userID) => {
         const usersApi = async () => {
             try {
-                const response = await fetch(`http://192.168.1.5:4000/users/${userID}`);
+                const response = await fetch(`https://sila-b.onrender.com/users/${userID}`);
                 const data = await response.json();
                 const currentEurWallet = data.user.eurWallet;
 
                 const patchWalletApi = async () => {
                     try {
-                        const response = await fetch(`http://192.168.1.5:4000/users/eurWallet/${userID}`, {
+                        const response = await fetch(`https://sila-b.onrender.com/users/eurWallet/${userID}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ function MediaBuyingPage() {
                         </div>
                         <div className="date">{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
                         <div className="commision">
-                            <button onClick={() => takeCommision(x.userID)} className="commision-btn">-$0.65</button>
+                            <button onClick={() => takeCommision(x.userID)} className="commision-btn">-£0.65</button>
                         </div>
                     </>
                 ))
