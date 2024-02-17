@@ -12,6 +12,7 @@ function WalletGrid() {
   const [firstApiDone, setFirstApiDone] = useState(false);
   const [secondApiDone, setSecondApiDone] = useState(false);
   const [thirdApiDone, setThirdApiDone] = useState(false);
+  const [fourthApiDone, setFourthApiDone] = useState(false);
 
   const override = css`
     display: block;
@@ -147,14 +148,40 @@ function WalletGrid() {
 
     paymentHistoryApi();
     /////////////////////
+
+    const sendEmail = async () => {
+      try {
+        const response = await fetch('https://sila-b.onrender.com/sendMail/acceptedTopUp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            userEmail: target.email,
+            paymentMethod: target.paymentMethod,
+            transferAmount: target.chargeAmount,
+            transactionID: target.transactionID,
+            acceptedOn: `${target.date.slice(0, 4)} . ${target.date.slice(5, 7)} . ${target.date.slice(8, 10)}`
+          })
+        });
+
+        const data = await response.json();
+        setFourthApiDone(true);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    sendEmail();
   };
 
 
   useEffect(() => {
-    if (firstApiDone && secondApiDone && thirdApiDone) {
+    if (firstApiDone && secondApiDone && thirdApiDone &&
+      fourthApiDone) {
       window.location.reload();
     }
-  }, [firstApiDone, secondApiDone, thirdApiDone]);
+  }, [firstApiDone, secondApiDone, thirdApiDone, fourthApiDone]);
 
 
 
