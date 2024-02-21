@@ -219,7 +219,6 @@ function AdAccountsPage() {
                     </svg>
                     <p>Ad name: {y.adName}</p>
                     <p>Ad deposit: {y.adDeposit}</p>
-                    <p>Ad ID: {y.adID}</p>
                   </div>
                 ))
               }

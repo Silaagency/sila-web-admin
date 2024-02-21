@@ -158,7 +158,6 @@ function RefundGrid() {
   return (
     <div className='refund-grid'>
         <div className="id">Application ID</div>
-        <div className="ad-id">Ad ID</div>
         <div className="ad-name">Ad name</div>
         <div className="refund-reason">Refund reason</div>
         <div className="refund-amount">Refund amount</div>
@@ -169,7 +168,6 @@ function RefundGrid() {
             apiData.map((x) => (
                 <>
                     <div>{x._id}</div>
-                    <div>{x.adAccountID}</div>
                     <div>{x.adAccountName}</div>
                     <div>{x.refundReason}</div>
                     <div>{x.amount}</div>

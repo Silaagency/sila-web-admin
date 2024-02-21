@@ -89,7 +89,6 @@ function BMGrid() {
   return (
     <div className='bm-grid'>
         <div className="id">Application ID</div>
-        <div className="ad-id">Ad ID</div>
         <div className="ad-name">Ad name</div>
         <div className="bm-id">BM ID</div>
         <div className="date">Date</div>
@@ -99,7 +98,6 @@ function BMGrid() {
             apiData.map((x) => (
                 <>
                     <div>{x._id}</div>
-                    <div>{x.adID}</div>
                     <div>{x.adName}</div>
                     <div>{x.bmID}</div>
                     <div>{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
