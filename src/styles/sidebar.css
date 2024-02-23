@@ -3,6 +3,7 @@
     max-width: 400px;
     min-width: 250px;
     height: 100%;
+    min-height: 400px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     background-color: purple;
@@ -16,12 +17,17 @@
     left: 0;
     top: 0;
     bottom: 0;
+    overflow-y: auto;
 }
 
 @keyframes slide-in {
     100% {
         transform: translateX(0);
     }
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
 }
 
 .sidebar-btn {

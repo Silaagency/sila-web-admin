@@ -1,0 +1,17 @@
+.shooting-page {
+    height: 100vh;
+}
+
+.shooting-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.shooting-grid div {
+    border: 2px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}
