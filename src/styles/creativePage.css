@@ -1,0 +1,14 @@
+.creative-page {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.creative-page div {
+    border: 2px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
+}

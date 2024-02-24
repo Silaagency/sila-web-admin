@@ -11,6 +11,7 @@ import PassPage from './pages/PassPage';
 import MediaBuyingPage from './pages/MediaBuyingPage';
 import HomeNewsPage from './pages/HomeNewsPage';
 import ShootingPage from './pages/ShootingPage';
+import CreativePage from './pages/CreativePage';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path='/media' element={<MediaBuyingPage />} />
           <Route path='/homeNews' element={<HomeNewsPage />} />
           <Route path='/shooting' element={<ShootingPage />} />
+          <Route path='/creative' element={<CreativePage />} />
         </Routes>
       </Router>
     </div>
