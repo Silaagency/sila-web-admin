@@ -51,6 +51,26 @@ function CreativePage() {
         }
     }; 
 
+    const deleteCreative = (_id) => {
+        const target = apiData.find((x) => x._id === _id);
+    
+        const creativeApi = async () => {
+          try {
+            const response = await fetch(`https://sila-b.onrender.com/creativeVids/${target._id}`, {
+              method: 'DELETE'
+            });
+    
+            const data = await response.json();
+            alert('Deleted successfully!');
+            window.location.reload();
+          } catch (err) {
+            console.error(err);
+          }
+        };
+    
+        creativeApi();
+    };
+
   return (
     <div className='creative-page'>
         <div className="id">ID</div>
@@ -61,6 +81,7 @@ function CreativePage() {
         <div className="videos">Videos</div>
         <div className="date">Date</div>
         <div className="send">Send</div>
+        <div className="delete">Delete</div>
 
         {
             apiData.map((x) => (
@@ -77,6 +98,13 @@ function CreativePage() {
                     <div className="send">
                         <input onChange={(e) => setLinkInput(e.target.value)} type="text" />
                         <button onClick={() => sendLink(x._id)}>Send</button>
+                    </div>
+                    <div>
+                        <button onClick={() => deleteCreative(x._id)} className='delete-btn'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                            </svg>
+                        </button>
                     </div>
                 </>
             ))

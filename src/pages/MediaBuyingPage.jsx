@@ -5,6 +5,8 @@ function MediaBuyingPage() {
 
     const [apiData, setApiData] = useState([]);
 
+    const [linkInput, setLinkInput] = useState(null);
+
     const videoRegex = /\b(mp4|mov)\b/;
     const imageRegex = /\b(jpg|png|jpeg|gif)\b/;
 
@@ -58,6 +60,55 @@ function MediaBuyingPage() {
         usersApi();
     };
 
+    const sendLink = (_id) => {
+        const target = apiData.find((x) => x._id === _id);
+
+        if (linkInput !== null) {
+            const mediaLinkApi = async () => {
+                try {
+                    const response = await fetch('https://sila-b.onrender.com/mediaLink', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            userID: target.userID,
+                            link: linkInput
+                        })
+                    });
+
+                    const data = await response.json();
+                    alert('Sent successfully!');
+                    window.location.reload();
+                } catch (err) {
+                    console.error(err);
+                }
+            };
+
+            mediaLinkApi();
+        }
+    };
+
+    const deleteRow = (_id) => {
+        const target = apiData.find((x) => x._id === _id);
+
+        const mediaApi = async () => {
+            try {
+                const response = await fetch(`https://sila-b.onrender.com/media/${target._id}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+                alert('Deleted successfully!');
+                window.location.reload();
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        mediaApi();
+    };
+
   return (
     <div className='media-buying-page'>
         <div className="media-container">
@@ -68,7 +119,9 @@ function MediaBuyingPage() {
             <div className="pack">Pack purchased</div>
             <div className="media">Media</div>
             <div className="date">Date</div>
+            <div className="send">Send video Google drive link</div>
             <div className="commision">Commision</div>
+            <div className="delete">Delete</div>
 
             {
                 apiData.map((x) => (
@@ -98,9 +151,18 @@ function MediaBuyingPage() {
                             }
                         </div>
                         <div className="date">{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
-                        <div className="commision">
-                            <button onClick={() => takeCommision(x.userID)} className="commision-btn">-£0.65</button>
+                        <div className="send">
+                            <input onChange={(e) => setLinkInput(e.target.value)} type="text" />
+                            <button onClick={() => sendLink(x._id)}>Send</button>
                         </div>
+                        <div className="commision">
+                            <button onClick={() => takeCommision(x.userID)} className="commision-btn">-€0.65</button>
+                        </div>
+                        <button onClick={() => deleteRow(x._id)} className="delete-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                            </svg>
+                        </button>
                     </>
                 ))
             }

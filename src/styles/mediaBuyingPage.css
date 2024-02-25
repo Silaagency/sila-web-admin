@@ -1,21 +1,17 @@
 .media-buying-page {
-    background-color: purple;
     height: 100vh;
-    padding: 20px;
 }
 
 .media-container {
     height: 100%;
-    border-radius: 30px;
     background-color: #fff;
     overflow: auto;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(10, 1fr);
 }
 
 .media-container div {
-    border-bottom: 2px solid purple;
-    border-right: 2px solid purple;
+    border: 2px solid purple;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,4 +64,9 @@
     background-color: #fff;
     border: 3px solid purple;
     color: purple;
+}
+
+.send {
+    display: flex;
+    gap: 20px;
 }

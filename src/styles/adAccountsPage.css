@@ -93,7 +93,7 @@
 
 .reject {
     border: 3px solid purple;
-    width: 50%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,4 +128,16 @@
 
 .accepted div svg, .rejected div svg {
     transform: scale(1.4);
+}
+
+.delete-button {
+    background-color: red;
+    color: #fff;
+    padding: 20px;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
 }

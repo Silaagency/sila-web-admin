@@ -1,7 +1,7 @@
 .wallet-grid {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-columns: repeat(12, 1fr);
     border-radius: 30px;
     overflow: auto;
     background-color: #000;
@@ -21,7 +21,7 @@
 .user-phone, .charge-amount,
 .transaction-id, .transaction-photo,
 .currency, .payment-method, .date,
-.decision {
+.decision, .delete {
     border-bottom: 2px solid #fff;
 }
 

@@ -1,7 +1,7 @@
 .refund-grid {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     border-radius: 30px;
     overflow: auto;
     background-color: #000;

@@ -155,6 +155,26 @@ function RefundGrid() {
         patchRefundStatusApi();
     };
 
+    const deleteRefund = (_id) => {
+        const target = apiData.find((x) => x._id === _id);
+    
+        const refundApi = async () => {
+          try {
+            const response = await fetch(`https://sila-b.onrender.com/refund/${target._id}`, {
+              method: 'DELETE'
+            });
+    
+            const data = await response.json();
+            alert('Deleted successfully!');
+            window.location.reload();
+          } catch (err) {
+            console.error(err);
+          }
+        };
+    
+        refundApi();
+    };
+
   return (
     <div className='refund-grid'>
         <div className="id">Application ID</div>
@@ -163,6 +183,7 @@ function RefundGrid() {
         <div className="refund-amount">Refund amount</div>
         <div className="date">Date</div>
         <div className="decision">Decision</div>
+        <div className="delete">Delete</div>
 
         {
             apiData.map((x) => (
@@ -209,6 +230,14 @@ function RefundGrid() {
                             <div>Rejected</div>
                         )
                     }
+
+                    <div>
+                        <button onClick={() => deleteRefund(x._id)} className='delete-btn'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                            </svg>
+                        </button>
+                    </div>
                 </>
             ))
         }
