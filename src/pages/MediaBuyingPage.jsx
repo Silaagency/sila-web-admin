@@ -6,6 +6,7 @@ function MediaBuyingPage() {
     const [apiData, setApiData] = useState([]);
 
     const [linkInput, setLinkInput] = useState(null);
+    const [linkName, setLinkName] = useState(null);
 
     const videoRegex = /\b(mp4|mov)\b/;
     const imageRegex = /\b(jpg|png|jpeg|gif)\b/;
@@ -63,7 +64,7 @@ function MediaBuyingPage() {
     const sendLink = (_id) => {
         const target = apiData.find((x) => x._id === _id);
 
-        if (linkInput !== null) {
+        if (linkInput !== null && linkName !== null) {
             const mediaLinkApi = async () => {
                 try {
                     const response = await fetch('https://sila-b.onrender.com/mediaLink', {
@@ -73,7 +74,8 @@ function MediaBuyingPage() {
                         },
                         body: JSON.stringify({
                             userID: target.userID,
-                            link: linkInput
+                            link: linkInput,
+                            linkName: linkName
                         })
                     });
 
@@ -133,26 +135,13 @@ function MediaBuyingPage() {
                         <div className="pack">{x.pack}</div>
                         <div className="media">
                             {
-                                x.media.map((y) => (
-                                    <>
-                                        {
-                                            videoRegex.test(y) && (
-                                                <video src={y} controls />
-                                            )
-                                        }
-
-                                        {
-                                            imageRegex.test(y) && (
-                                                <img src={y} alt="" />
-                                            )
-                                        }
-                                    </>
-                                ))
+                                <p>{x.media}</p>
                             }
                         </div>
                         <div className="date">{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
                         <div className="send">
-                            <input onChange={(e) => setLinkInput(e.target.value)} type="text" />
+                            <input onChange={(e) => setLinkInput(e.target.value)} type="text" placeholder='Link...' />
+                            <input onChange={(e) => setLinkName(e.target.value)} type="text" placeholder='Link name...' />
                             <button onClick={() => sendLink(x._id)}>Send</button>
                         </div>
                         <div className="commision">

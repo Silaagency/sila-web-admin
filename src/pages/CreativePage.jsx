@@ -7,6 +7,7 @@ function CreativePage() {
 
     const [apiData, setApiData] = useState([]);
     const [linkInput, setLinkInput] = useState(null);
+    const [linkName, setLinkName] = useState(null);
 
     useEffect(() => {
         const creativeVidsApi = async () => {
@@ -25,7 +26,7 @@ function CreativePage() {
     const sendLink = (_id) => {
         const target = apiData.find((x) => x._id === _id);
 
-        if (linkInput !== null) {
+        if (linkInput !== null && linkName !== null) {
             const creativeLinkApi = async () => {
                 try {
                     const response = await fetch('https://sila-b.onrender.com/creativeLink', {
@@ -35,7 +36,8 @@ function CreativePage() {
                         },
                         body: JSON.stringify({
                             userID: target.userID,
-                            link: linkInput
+                            link: linkInput,
+                            linkName: linkName
                         })
                     });
 
@@ -92,11 +94,12 @@ function CreativePage() {
                     <div className="phone-number">{x.phoneNumber}</div>
                     <div className="creative-plan">{x.creativePlan}</div>
                     <div className="videos">
-                        <video src={x.videos} controls />
+                        <p>{x.video}</p>
                     </div>
                     <div className="date">{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
                     <div className="send">
-                        <input onChange={(e) => setLinkInput(e.target.value)} type="text" />
+                        <input onChange={(e) => setLinkInput(e.target.value)} type='text' placeholder='Link...' />
+                        <input onChange={(e) => setLinkName(e.target.value)} type="text" placeholder='Link name...' />
                         <button onClick={() => sendLink(x._id)}>Send</button>
                     </div>
                     <div>
