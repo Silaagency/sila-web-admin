@@ -1,0 +1,30 @@
+.support-page {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.support-page div {
+    border: 2px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.message {
+    background-color: lightgray;
+}
+
+.phone-number button {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: #fff;
+    border: none;
+    gap: 20px;
+    border-radius: 50px;
+    user-select: text;
+    cursor: pointer;
+}
