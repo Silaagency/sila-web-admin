@@ -1,11 +1,4 @@
-.media-buying-page {
-    height: 100vh;
-}
-
 .media-container {
-    height: 100%;
-    background-color: #fff;
-    overflow: auto;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
 }
