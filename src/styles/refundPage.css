@@ -1,14 +1,20 @@
 .refund-page {
-    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
 }
 
-.refundbar {
-    height: 70px;
-    background-color: #000;
-    border-radius: 50px;
-    color: #fff;
+.refund-page div {
+    border: 2px solid purple;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    padding: 20px;
+}
+
+.refund-delete-btn {
+    cursor: pointer;
+}
+
+.refund-delete-btn svg {
+    transform: scale(2);
 }

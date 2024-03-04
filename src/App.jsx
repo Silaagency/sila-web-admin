@@ -5,7 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 import MetaPage from './pages/MetaPage';
 import WalletPage from './pages/WalletPage';
 import AdAccountsPage from './pages/AdAccountsPage';
-import BMSharePage from './pages/BMSharePage';
+import BMPage from './pages/BMPage';
 import RefundPage from './pages/RefundPage';
 import PassPage from './pages/PassPage';
 import MediaBuyingPage from './pages/MediaBuyingPage';
@@ -25,7 +25,7 @@ function App() {
           <Route path='/meta' element={<MetaPage />} />
           <Route path='/wallet' element={<WalletPage />} />
           <Route path='/ad-accounts' element={<AdAccountsPage />} />
-          <Route path='/bm' element={<BMSharePage />} />
+          <Route path='/bm' element={<BMPage />} />
           <Route path='/refund' element={<RefundPage />} />
           <Route path='/pass' element={<PassPage />} />
           <Route path='/media' element={<MediaBuyingPage />} />

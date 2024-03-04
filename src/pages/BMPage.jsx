@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/bmGrid.css';
+import '../styles/bmPage.css';
 import { css } from '@emotion/react';
 import { RingLoader } from 'react-spinners';
 
-function BMGrid() {
+function BMPage() {
 
     const [apiData, setApiData] = useState([]);
 
@@ -107,7 +107,7 @@ function BMGrid() {
     };
 
   return (
-    <div className='bm-grid'>
+    <div className='bm-page'>
         <div className="id">Application ID</div>
         <div className="ad-name">Ad name</div>
         <div className="bm-id">BM ID</div>
@@ -160,7 +160,7 @@ function BMGrid() {
                     }
 
                     <div>
-                        <button onClick={() => deleteBM(x._id)} className='delete-btn'>
+                        <button onClick={() => deleteBM(x._id)} className='bm-delete-btn'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                 <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                             </svg>
@@ -173,4 +173,4 @@ function BMGrid() {
   )
 };
 
-export default BMGrid;
+export default BMPage;

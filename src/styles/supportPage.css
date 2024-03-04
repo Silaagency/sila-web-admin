@@ -1,6 +1,6 @@
 .support-page {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .support-page div {
@@ -27,4 +27,12 @@
     border-radius: 50px;
     user-select: text;
     cursor: pointer;
+}
+
+.support-delete-btn {
+    cursor: pointer;
+}
+
+.support-delete-btn svg {
+    transform: scale(2);
 }

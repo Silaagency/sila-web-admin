@@ -1,14 +1,46 @@
 .wallet-page {
-    padding: 50px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
 }
 
-.walletbar {
-    height: 70px;
-    background-color: #000;
-    border-radius: 50px;
-    color: #fff;
+.wallet-page div {
+    border: 2px solid purple;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    padding: 20px;
+}
+
+.transaction-proof {
+    height: 100px;
+    border-radius: 10px;
+}
+
+.decision-btn-container {
+    gap: 20px;
+}
+
+.accept-btn {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.reject-btn {
+    background-color: transparent;
+    border: 2px solid #000;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.wallet-delete-btn {
+    cursor: pointer;
+}
+
+.wallet-delete-btn svg {
+    transform: scale(2);
 }

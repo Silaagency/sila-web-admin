@@ -4,6 +4,7 @@
 
 .ad-account-bar {
     height: 70px;
+    min-width: 400px;
     background-color: #000;
     border-radius: 50px;
     color: #fff;

@@ -1,24 +1,14 @@
-.bm-grid {
-    margin-top: 30px;
+.bm-page {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    border-radius: 30px;
-    overflow: auto;
-    background-color: #000;
-    color: #fff;
 }
 
-.bm-grid div {
+.bm-page div {
+    border: 2px solid purple;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 13px;
-    padding: 10px;
-    border-left: 2px solid #fff;
-}
-
-.ad-id, .ad-name, .bm-id {
-    border-bottom: 2px solid #fff;
+    padding: 20px;
 }
 
 .decision-container {
@@ -32,10 +22,20 @@
     border-radius: 20px;
     border: none;
     cursor: pointer;
+    background-color: #000;
+    color: #fff;
 }
 
 .decision-container button:nth-of-type(2) {
     background-color: transparent;
-    border: 3px solid #fff;
-    color: #fff;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.bm-delete-btn {
+    cursor: pointer;
+}
+
+.bm-delete-btn svg {
+    transform: scale(2);
 }
