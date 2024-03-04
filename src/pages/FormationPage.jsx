@@ -78,7 +78,7 @@ function FormationPage() {
                     <div>{x.userName}</div>
                     <div>{x.email}</div>
                     <div>{x.phoneNumber}</div>
-                    <div>{x.date}</div>
+                    <div>{`${x.date.slice(0, 4)} . ${x.date.slice(5, 7)} . ${x.date.slice(8, 10)}`}</div>
                     <div className='open-formation-btn'>
                         <button onClick={() => unlock(x._id)}>
                             <p>Open formation</p>
