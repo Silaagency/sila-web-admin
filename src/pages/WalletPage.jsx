@@ -125,28 +125,54 @@ function WalletPage() {
 
 
     //Posting the amount to payment history
-    const paymentHistoryApi = async () => {
-      try {
-        const response = await fetch('https://sila-b.onrender.com/paymentHistory', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            userID: target.userID,
-            type: 'Wallet re-charge',
-            amount: `+${target.chargeAmount}`
-          })
-        });
-
-        const data = await response.json();
-        setThirdApiDone(true);
-      } catch (err) {
-        console.error(err);
-      }
+    if (target.currency === 'USD') {
+      const paymentHistoryApi = async () => {
+        try {
+          const response = await fetch('https://sila-b.onrender.com/paymentHistory', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              userID: target.userID,
+              type: 'Wallet re-charge',
+              amount: `+${target.chargeAmount}`,
+              service: 'Ads'
+            })
+          });
+  
+          const data = await response.json();
+          setThirdApiDone(true);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+  
+      paymentHistoryApi();
+    } else {
+      const paymentHistoryApi = async () => {
+        try {
+          const response = await fetch('https://sila-b.onrender.com/paymentHistory', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              userID: target.userID,
+              type: 'Wallet re-charge',
+              amount: `+${target.chargeAmount}`
+            })
+          });
+  
+          const data = await response.json();
+          setThirdApiDone(true);
+        } catch (err) {
+          console.error(err);
+        }
+      };
+  
+      paymentHistoryApi();
     };
-
-    paymentHistoryApi();
     /////////////////////
 
     const sendEmail = async () => {
