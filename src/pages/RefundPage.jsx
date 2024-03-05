@@ -106,7 +106,8 @@ function RefundPage() {
                         body: JSON.stringify({
                             userID: target.userID,
                             type: 'Refund',
-                            amount: `+${parseInt(refundInput)}`
+                            amount: `+${parseInt(refundInput)}`,
+                            service: 'Ads'
                         })
                     });
 
