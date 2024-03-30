@@ -14,6 +14,7 @@ import ShootingPage from './pages/ShootingPage';
 import CreativePage from './pages/CreativePage';
 import SupportPage from './pages/SupportPage';
 import FormationPage from './pages/FormationPage';
+import VIPAdAccountsPage from './pages/VIPAdAccountsPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/creative' element={<CreativePage />} />
           <Route path='/support' element={<SupportPage />} />
           <Route path='/formation' element={<FormationPage />} />
+          <Route path='/VIP' element={<VIPAdAccountsPage />} />
         </Routes>
       </Router>
     </div>

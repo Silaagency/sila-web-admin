@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/adAccountsPage.css';
+import '../styles/vipAdAccountsPage.css';
 import { css } from '@emotion/react';
 import { RingLoader } from 'react-spinners';
 
-function AdAccountsPage() {
+function VIPAdAccountsPage() {
 
   const override = css`
     display: block;
@@ -21,7 +21,7 @@ function AdAccountsPage() {
   useEffect(() => {
     const licenseApi = async () => {
       try {
-        const response = await fetch('https://sila-b.onrender.com/ad');
+        const response = await fetch('https://sila-b.onrender.com/adVip');
         const data = await response.json();
         setApiData(data.ADs);
       } catch (err) {
@@ -39,7 +39,7 @@ function AdAccountsPage() {
 
     const sendAdId = async () => {
       try {
-        const response = await fetch(`https://sila-b.onrender.com/ad/adAccountID/${target._id}`, {
+        const response = await fetch(`https://sila-b.onrender.com/adVip/adAccountID/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ function AdAccountsPage() {
 
         const patchLicenseStatusApi = async () => {
           try {
-            const response = await fetch(`https://sila-b.onrender.com/ad/${target._id}`, {
+            const response = await fetch(`https://sila-b.onrender.com/adVip/${target._id}`, {
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ function AdAccountsPage() {
 
     const patchLicenseStatusApi = async () => {
       try {
-        const response = await fetch(`https://sila-b.onrender.com/ad/${target._id}`, {
+        const response = await fetch(`https://sila-b.onrender.com/adVip/${target._id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ function AdAccountsPage() {
     
     const adsApi = async () => {
       try {
-        const response = await fetch(`https://sila-b.onrender.com/ad/${target._id}`, {
+        const response = await fetch(`https://sila-b.onrender.com/adVip/${target._id}`, {
           method: 'DELETE'
         });
 
@@ -182,72 +182,13 @@ function AdAccountsPage() {
               </div>
             </div>
 
-            <div className="page-number">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
-                <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2m0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14"/>
-              </svg>
-              <p>Page number: {x.pageNumber}</p>
-            </div>
-
-            <div className="page-urls">
-              {
-                x.pageURL.map((y) => (
-                  <div className="page-url-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-                      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/>
-                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/>
-                    </svg>
-                    <p>Page URL: {y}</p>
-                  </div>
-                ))
-              }
-            </div>
-
-            <div className="domain-number">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
-                <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2m0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14"/>
-              </svg>
-              <p>Domain number: {x.domainNumber}</p>
-            </div>
-
-            <div className="domains">
-              {
-                x.domainName.map((y) => (
-                  <div className="domain-card">
+            <div className="website">
+                <div className="website-card">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe-americas" viewBox="0 0 16 16">
-                      <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484q-.121.12-.242.234c-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
                     </svg>
-                    <p>Domain: {y}</p>
-                  </div>
-                ))
-              }
-            </div>
-
-            <div className="is-app">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-app-indicator" viewBox="0 0 16 16">
-                <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1z"/>
-                <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-              </svg>
-              {
-                x.isApp ? (
-                  <p>Is App: Yes</p>
-                ) : (
-                  <p>Is App: No</p>
-                )
-              }
-            </div>
-
-            <div className="app-ids">
-              {
-                x.appID.map((y) => (
-                  <div className="app-id-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-button-wide-fill" viewBox="0 0 16 16">
-                      <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-                    <p>App ID: {y}</p>
-                  </div>
-                ))
-              }
+                    <p>Website: {x.website}</p>
+                </div>
             </div>
 
             <div className="ads-number">
@@ -396,4 +337,4 @@ function AdAccountsPage() {
   )
 }
 
-export default AdAccountsPage
+export default VIPAdAccountsPage

@@ -45,13 +45,13 @@
     gap: 20px;
 }
 
-.page-urls, .domains, .app-ids, .ad-accounts {
+.website, .domains, .app-ids, .ad-accounts {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
 }
 
-.page-url-card, .domain-card, .app-id-card, 
+.website-card, .domain-card, .app-id-card, 
 .ad-account-card {
     background-color: purple;
     color: #fff;
