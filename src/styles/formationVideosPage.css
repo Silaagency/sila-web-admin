@@ -1,0 +1,141 @@
+.add-video-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.add-video-btn {
+    padding: 10px;
+    padding-inline: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: purple;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    color: #fff;
+}
+
+.add-video-btn:hover {
+    background-color: rgba(128, 0, 128, 0.524);
+}
+
+.add-vid-field {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    width: 300px;
+    border-radius: 20px;
+    background-color: purple;
+}
+
+.add-vid-field div:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-vid-field input {
+    border: none;
+    border-bottom: 2px solid #fff;
+    background-color: purple;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.add-vid-field input:focus {
+    outline: none;
+}
+
+.add-vid-field div:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.add-cancel-btn {
+    padding: 10px;
+    padding-inline: 20px;
+    border-radius: 50px;
+    background-color: red;
+    color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.add-cancel-btn:hover {
+    background-color: rgba(255, 0, 0, 0.588);
+}
+
+.add-save-btn {
+    padding: 10px;
+    padding-inline: 20px;
+    border-radius: 50px;
+    background-color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.add-save-btn:hover {
+    background-color: #ffffff78;
+}
+
+.formation-vids-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.formation-vids-grid p {
+    border-right: 1px solid;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.formation-vids-grid div {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.video-name-container, .video-link-container,
+.delete-video-container {
+    border-bottom: 1px dotted;
+}
+
+.delete-video-container button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.delete-video-container button:hover {
+    background-color: rgba(255, 0, 0, 0.373);
+}

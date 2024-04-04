@@ -15,6 +15,9 @@ import CreativePage from './pages/CreativePage';
 import SupportPage from './pages/SupportPage';
 import FormationPage from './pages/FormationPage';
 import VIPAdAccountsPage from './pages/VIPAdAccountsPage';
+import ControlFormationsPage from './pages/ControlFormationsPage';
+import AddFormationPage from './pages/AddFormationPage';
+import FormationVideosPage from './pages/FormationVideosPage';
 
 function App() {
   return (
@@ -36,6 +39,9 @@ function App() {
           <Route path='/support' element={<SupportPage />} />
           <Route path='/formation' element={<FormationPage />} />
           <Route path='/VIP' element={<VIPAdAccountsPage />} />
+          <Route path='ControlFormations' element={<ControlFormationsPage />} />
+          <Route path='AddFormation' element={<AddFormationPage />} />
+          <Route path='FormationVideos' element={<FormationVideosPage />} />
         </Routes>
       </Router>
     </div>
