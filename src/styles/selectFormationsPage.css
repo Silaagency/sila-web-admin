@@ -1,0 +1,37 @@
+.formations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+}
+
+.formation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.formation img {
+    height: 80px;
+    width: 80px;
+}
+
+.formation button {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: purple;
+    color: #fff;
+    transform: scale(1.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.formation button:hover {
+    background-color: rgba(128, 0, 128, 0.651);
+}

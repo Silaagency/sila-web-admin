@@ -1,7 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import '../styles/formationVideosPage.css';
+import data from '../Context';
+import { useNavigate } from 'react-router-dom';
+import { OrbitProgress } from 'react-loading-indicators';
 
 function FormationVideosPage() {
+
+    const navigate = useNavigate();
+
+    const {clickedFormation, setClickedFormation} = useContext(data);
 
     const [addVideo, setAddVideo] = useState(false);
 
@@ -13,6 +20,109 @@ function FormationVideosPage() {
 
     const [addVideoName, setAddVideoName] = useState('');
     const [addVideoLink, setAddVideoLink] = useState('');
+
+    const [addLoading, setAddLoading] = useState(false);
+
+    const addVid = () => {
+        setAddLoading(true);
+
+        const push = async () => {
+            try {
+                const response = await fetch(`https://sila-b.onrender.com/formation/pushVideos/${clickedFormation._id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        videoName: addVideoName,
+                        videoLink: addVideoLink
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    navigate('/ControlFormations');
+                };
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        push();
+    };
+
+    const changeVideoName = (_id) => {
+        const patch = async () => {
+            try {
+                const response = await fetch(`https://sila-b.onrender.com/formation/updateVideoName/${_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        videoName: videoName
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    navigate('/ControlFormations');
+                };
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        patch();
+    };
+
+    const changeVideoLink = (_id) => {
+        const patch = async () => {
+            try {
+                const response = await fetch(`https://sila-b.onrender.com/formation/updateVideoLink/${_id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        videoLink: videoLink
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    navigate('/ControlFormations');
+                };
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        patch();
+    };
+
+    const deleteVideo = (_id) => {
+        const remove = async () => {
+            try {
+                const response = await fetch(`https://sila-b.onrender.com/formation/deleteVideo/${_id}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    navigate('/ControlFormations');
+                };
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        remove();
+    };
 
   return (
     <div className='formation-videos-page'>
@@ -27,7 +137,17 @@ function FormationVideosPage() {
 
                         <div>
                             <button onClick={() => setAddVideo(false)} className='add-cancel-btn'>Cancel</button>
-                            <button className='add-save-btn'>Save</button>
+                            <button onClick={addVid} className='add-save-btn'>
+                                {
+                                    addLoading ? (
+                                        <OrbitProgress variant="track-disc" speedPlus="3" easing="linear" size='small' color='black' />
+                                    ) : (
+                                        <>
+                                            Save
+                                        </>
+                                    )
+                                }
+                            </button>
                         </div>
                     </div>
                 ) : (
@@ -60,61 +180,67 @@ function FormationVideosPage() {
 
             <p>Delete Video</p>
 
-            <div className='video-name-container'>
-                {
-                    changeVidName ? (
-                        <div className='input-btns-container'>
-                            <input onChange={(e) => setVideoName(e.target.value)} value={videoName} type="text" placeholder='Video Name...' />
-                            <div className="cancel-save-btns-container">
-                                <button onClick={() => setChangeVidName(false)}>Cancel</button>
-                                <button>Save</button>
-                            </div>
+            {
+                clickedFormation.videos.map((x) => (
+                    <>
+                        <div className='video-name-container'>
+                            {
+                                changeVidName ? (
+                                    <div className='input-btns-container'>
+                                        <input onChange={(e) => setVideoName(e.target.value)} value={videoName} type="text" placeholder='Video Name...' />
+                                        <div className="cancel-save-btns-container">
+                                            <button onClick={() => setChangeVidName(false)}>Cancel</button>
+                                            <button onClick={() => changeVideoName(x._id)}>Save</button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <button onClick={() => setChangeVidName(true)} className='edit-btn'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                            </svg>
+                                        </button>
+                                        {x.videoName}
+                                    </>
+                                )
+                            }
                         </div>
-                    ) : (
-                        <>
-                            <button onClick={() => setChangeVidName(true)} className='edit-btn'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+
+                        <div className='video-link-container'>
+                            {
+                                changeVidLink ? (
+                                    <div className='input-btns-container'>
+                                        <input onChange={(e) => setVideoLink(e.target.value)} value={videoLink} type="text" placeholder='Video Link...' />
+                                        <div className="cancel-save-btns-container">
+                                            <button onClick={() => setChangeVidLink(false)}>Cancel</button>
+                                            <button onClick={() => changeVideoLink(x._id)}>Save</button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <button onClick={() => setChangeVidLink(true)} className='edit-btn'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                            </svg>
+                                        </button>
+                                        {x.videoLink}
+                                    </>
+                                )
+                            }
+                        </div>
+
+                        <div className="delete-video-container">
+                            <button onClick={() => deleteVideo(x._id)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                 </svg>
                             </button>
-                            This is a video
-                        </>
-                    )
-                }
-            </div>
-
-            <div className='video-link-container'>
-                {
-                    changeVidLink ? (
-                        <div className='input-btns-container'>
-                            <input onChange={(e) => setVideoLink(e.target.value)} value={videoLink} type="text" placeholder='Video Link...' />
-                            <div className="cancel-save-btns-container">
-                                <button onClick={() => setChangeVidLink(false)}>Cancel</button>
-                                <button>Save</button>
-                            </div>
                         </div>
-                    ) : (
-                        <>
-                            <button onClick={() => setChangeVidLink(true)} className='edit-btn'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                </svg>
-                            </button>
-                            https://drive.google.com/file/d/1g4m8ToRJfjQL8Wvw8hxEf6homvTVYpnl/view?usp=sharing
-                        </>
-                    )
-                }
-            </div>
-
-            <div className="delete-video-container">
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                    </svg>
-                </button>
-            </div>
+                    </>
+                ))
+            }
         </div>
     </div>
   )

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import '../styles/addFormationPage.css';
+import { OrbitProgress } from 'react-loading-indicators';
+import { useNavigate } from 'react-router-dom';
 
 function AddFormationPage() {
+
+    const navigate = useNavigate();
 
     const [photo, setPhoto] = useState('');
     const [name, setName] = useState('');
@@ -11,6 +15,8 @@ function AddFormationPage() {
     const [linksNumber, setLinksNumber] = useState(1);
     const [linkNames, setLinkNames] = useState([]);
     const [links, setLinks] = useState([]);
+
+    const [uploadLoading, setUploadLoading] = useState(false);
 
     //Rendering link fields when the user press the add button
     const renderLinkFields = () => {
@@ -50,6 +56,61 @@ function AddFormationPage() {
             newInputValues[i] = value;
             return newInputValues;
         });
+    };
+
+    const uploadFormation = () => {
+        setUploadLoading(true);
+
+        const formData = new FormData();
+        formData.append('formationPhoto', photo);
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('status', status);
+
+        const post = async () => {
+            try {
+                const response = await fetch('https://sila-b.onrender.com/formation/uploadFormation', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                const formationId = data.uploadedFormation._id;
+
+                if (response.ok) {
+                    const promises = linkNames.map(async (x, i) => {
+                        try {
+                          const response = await fetch(`https://sila-b.onrender.com/formation/pushVideos/${formationId}`, {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                              videoName: x,
+                              videoLink: links[i]
+                            })
+                          });
+                      
+                          const data = await response.json();
+
+                        } catch (err) {
+                          console.error(err);
+                        }
+                    });
+
+                    try {
+                        const results = await Promise.all(promises);
+                        navigate('/ControlFormations');
+                    } catch (err) {
+                        console.error(err);
+                    }
+                }; 
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        post();
     };
 
   return (
@@ -116,13 +177,21 @@ function AddFormationPage() {
             { renderLinkFields() }
         </div>
 
-        <button className='submit-btn'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
-                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
-            </svg>
+        <button onClick={uploadFormation} className='submit-btn'>
+            {
+                uploadLoading ? (
+                    <OrbitProgress variant="track-disc" speedPlus="3" easing="linear" size='small' color='purple' />
+                ) : (
+                    <>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                        </svg>
 
-            Upload Formation
+                        Upload Formation
+                    </>
+                )
+            }
         </button>
     </div>
   )

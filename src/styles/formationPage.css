@@ -1,6 +1,6 @@
 .formation-page {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .formation-page div {
@@ -27,4 +27,17 @@
 .open-formation-btn button:hover {
     background-color: green;
     color: #fff;
+}
+
+.remove-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-btn svg {
+    transform: scale(1.5);
 }

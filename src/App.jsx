@@ -18,33 +18,46 @@ import VIPAdAccountsPage from './pages/VIPAdAccountsPage';
 import ControlFormationsPage from './pages/ControlFormationsPage';
 import AddFormationPage from './pages/AddFormationPage';
 import FormationVideosPage from './pages/FormationVideosPage';
+import SelectFormationsPage from './pages/SelectFormationsPage';
+import data from './Context';
+import { useState } from 'react';
 
 function App() {
+
+  //context states:
+  const [clickedFormation, setClickedFormation] = useState([]);
+  const [clickedUser, setClickedUser] = useState('');
+  //
+
   return (
-    <div className="app">
-      <Router>
-        <Routes>
-          <Route path='/' element={<WelcomePage />} />
-          <Route path='/dashboard' element={<DashboardPage />} />
-          <Route path='/meta' element={<MetaPage />} />
-          <Route path='/wallet' element={<WalletPage />} />
-          <Route path='/ad-accounts' element={<AdAccountsPage />} />
-          <Route path='/bm' element={<BMPage />} />
-          <Route path='/refund' element={<RefundPage />} />
-          <Route path='/pass' element={<PassPage />} />
-          <Route path='/media' element={<MediaBuyingPage />} />
-          <Route path='/homeNews' element={<HomeNewsPage />} />
-          <Route path='/shooting' element={<ShootingPage />} />
-          <Route path='/creative' element={<CreativePage />} />
-          <Route path='/support' element={<SupportPage />} />
-          <Route path='/formation' element={<FormationPage />} />
-          <Route path='/VIP' element={<VIPAdAccountsPage />} />
-          <Route path='ControlFormations' element={<ControlFormationsPage />} />
-          <Route path='AddFormation' element={<AddFormationPage />} />
-          <Route path='FormationVideos' element={<FormationVideosPage />} />
-        </Routes>
-      </Router>
-    </div>
+    <data.Provider value={{ clickedFormation, setClickedFormation,
+    clickedUser, setClickedUser }}>
+      <div className="app">
+        <Router>
+          <Routes>
+            <Route path='/' element={<WelcomePage />} />
+            <Route path='/dashboard' element={<DashboardPage />} />
+            <Route path='/meta' element={<MetaPage />} />
+            <Route path='/wallet' element={<WalletPage />} />
+            <Route path='/ad-accounts' element={<AdAccountsPage />} />
+            <Route path='/bm' element={<BMPage />} />
+            <Route path='/refund' element={<RefundPage />} />
+            <Route path='/pass' element={<PassPage />} />
+            <Route path='/media' element={<MediaBuyingPage />} />
+            <Route path='/homeNews' element={<HomeNewsPage />} />
+            <Route path='/shooting' element={<ShootingPage />} />
+            <Route path='/creative' element={<CreativePage />} />
+            <Route path='/support' element={<SupportPage />} />
+            <Route path='/formation' element={<FormationPage />} />
+            <Route path='/VIP' element={<VIPAdAccountsPage />} />
+            <Route path='ControlFormations' element={<ControlFormationsPage />} />
+            <Route path='AddFormation' element={<AddFormationPage />} />
+            <Route path='FormationVideos' element={<FormationVideosPage />} />
+            <Route path='/SelectFormations' element={<SelectFormationsPage />} />
+          </Routes>
+        </Router>
+      </div>
+    </data.Provider>
   );
 };
 
