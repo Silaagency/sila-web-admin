@@ -19,6 +19,7 @@ import ControlFormationsPage from './pages/ControlFormationsPage';
 import AddFormationPage from './pages/AddFormationPage';
 import FormationVideosPage from './pages/FormationVideosPage';
 import SelectFormationsPage from './pages/SelectFormationsPage';
+import ControlAdCommisionsPage from './pages/ControlAdCommisionsPage';
 import data from './Context';
 import { useState } from 'react';
 
@@ -54,6 +55,7 @@ function App() {
             <Route path='AddFormation' element={<AddFormationPage />} />
             <Route path='FormationVideos' element={<FormationVideosPage />} />
             <Route path='/SelectFormations' element={<SelectFormationsPage />} />
+            <Route path='/AdCommisions' element={<ControlAdCommisionsPage />} />
           </Routes>
         </Router>
       </div>

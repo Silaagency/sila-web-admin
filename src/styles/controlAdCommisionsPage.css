@@ -1,0 +1,110 @@
+.search-field {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-field input {
+    height: 50px;
+    width: 300px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border: 1px solid purple;
+    text-indent: 20px;
+}
+
+.search-field input:focus {
+    outline: none;
+}
+
+.search-field button {
+    height: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.search-field button:hover {
+    background-color: rgba(128, 0, 128, 0.477);
+}
+
+.search-field button:active {
+    background-color: purple;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    margin-top: 30px;
+}
+
+.ad-commision-1, .ad-commision-3, .ad-commision-5,
+.vip-commision-1, .vip-commision-3, .vip-commision-5,
+.ad-price-1, .ad-price-3, .ad-price-5, .vip-price-1,
+.vip-price-3, .vip-price-5, .user-container {
+    border-right: 1px solid;
+    min-width: 300px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+.users-grid div img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.edit-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.edit-container div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.edit-container button {
+    padding: 10px;
+    padding-inline: 20px;
+    border-radius: 50px;
+}
+
+.edit-container button:nth-of-type(1) {
+    background-color: red;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.edit-container button:nth-of-type(2) {
+    background-color: purple;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+.edit-container input {
+    border: none;
+    border-bottom: 1px solid purple;
+}
+
+.edit-container input:focus {
+    outline: none;
+}
