@@ -10,7 +10,7 @@ function PassPage() {
     const [passKey, setPassKey] = useState(null);
 
     const check = () => {
-        const key = '+z5WAu9*$mkV^dz';
+        const key = 'sila0556';
 
         if (passKey !== null) {
             if (passKey === key) {
